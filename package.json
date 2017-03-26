@@ -1,7 +1,18 @@
 {
   "name": "blueq-redux-form",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "lint": "eslint src/. --ext=js --ext=jsx; exit 0",
+    "lint:fix": "eslint src/. --ext=js --ext=jsx --fix; exit 0",
+    "prepublish": "npm run production",
+    "production": "webpack -p",
+    "test": "jest; exit 0",
+    "test:watch": "jest --watch",
+    "test:watchall": "jest --watchAll",
+    "test:cov": "jest --coverage; exit 0"
+  },
   "author": "Rhys Gevaux <rhys.gevaux@blueq.com.au>",
   "license": "MIT",
   "jest": {
