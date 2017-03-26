@@ -4,6 +4,12 @@
   "main": "index.js",
   "author": "Rhys Gevaux <rhys.gevaux@blueq.com.au>",
   "license": "MIT",
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  },
   "dependencies": {
     "immutable": "^3.8.1",
     "react": "^15.4.2",
