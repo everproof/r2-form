@@ -1,0 +1,7 @@
+{
+  "name": "blueq-redux-form",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Rhys Gevaux <rhys.gevaux@blueq.com.au>",
+  "license": "MIT"
+}
