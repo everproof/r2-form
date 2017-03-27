@@ -40,7 +40,7 @@ export default {
   performance: {
     hints: 'warning',
     maxAssetSize: 200000,
-    maxEntryPointSize: 400000,
+    maxEntrypointSize: 400000,
   },
   devtool: 'source-map',
   context: PATHS.src,
@@ -49,5 +49,6 @@ export default {
     'react',
     'react-redux',
     'redux',
+    'redux-actions',
   ],
 }
