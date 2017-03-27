@@ -4,6 +4,7 @@
 import {
   CHANGE,
   CLEAR,
+  INITIALISE,
 } from 'form/actionTypes'
 
 function testActionTypeIsDefined (actionType, actionValue) {
@@ -15,4 +16,5 @@ function testActionTypeIsDefined (actionType, actionValue) {
 describe('testing action types', () => {
   testActionTypeIsDefined(CHANGE, 'CHANGE')
   testActionTypeIsDefined(CLEAR, 'CLEAR')
+  testActionTypeIsDefined(INITIALISE, 'INITIALISE')
 })

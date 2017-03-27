@@ -35,7 +35,7 @@ export default {
       PATHS.src,
     ],
     extensions: ['.js', '.jsx'],
-    enforeExtension: false,
+    enforceExtension: false,
   },
   performance: {
     hints: 'warning',
