@@ -39,6 +39,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "babel-preset-stage-3": "^6.22.0",
     "eslint": "^3.18.0",
+    "eslint-config-blueq": "^1.0.14",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-immutablejs": "^0.1.3",
