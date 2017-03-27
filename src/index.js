@@ -1,1 +1,1 @@
-export { default } from './components/blueqReduxForm'
+export { default } from './components/createForm'

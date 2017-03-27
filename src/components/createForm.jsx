@@ -7,11 +7,17 @@ import * as actionCreators from 'form/actionCreators'
 
 export default ({ form = 'form' }) => (WrappedComponent) => {
   class Form extends Component {
+    static childContextTypes = {
+      form: PropTypes.string.isRequired,
+    }
+
     static propTypes = {
       clear: PropTypes.func.isRequired,
       initialise: PropTypes.func.isRequired,
       initialValues: PropTypes.shape().isRequired,
     }
+
+    getChildContext = () => form
 
     componentDidMount = () => {
       this.props.initialise(form, this.props.initialValues)
@@ -29,7 +35,11 @@ export default ({ form = 'form' }) => (WrappedComponent) => {
       this.props.clear(form)
     }
 
-    render = () => <WrappedComponent {...this.props} />
+    render = () => (
+      <form name={form}>
+        <WrappedComponent {...this.props} />
+      </form>
+    )
   }
 
   const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch)
