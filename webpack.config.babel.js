@@ -46,6 +46,7 @@ export default {
   context: PATHS.src,
   externals: [
     'immutable',
+    'lodash',
     'react',
     'react-redux',
     'redux',
