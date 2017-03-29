@@ -9,8 +9,14 @@ import {
 
 export const change = createAction(
   CHANGE,
-  target => pick(target, ['checked', 'value']),
-  target => pick(target, ['form', 'name']))
+  ({ checked, value }) => ({
+    checked,
+    value,
+  }),
+  ({ form: { name: formName }, name }) => ({
+    form: formName,
+    name,
+  }))
 
 export const clear = createAction(
   CLEAR,

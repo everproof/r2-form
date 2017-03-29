@@ -17,10 +17,15 @@ export default ({ form = 'form' }) => (WrappedComponent) => {
       initialValues: PropTypes.shape().isRequired,
     }
 
-    getChildContext = () => form
+    getChildContext = () => ({
+      form,
+    })
 
     componentDidMount = () => {
-      this.props.initialise(form, this.props.initialValues)
+      this.props.initialise({
+        form,
+        initialValues: this.props.initialValues,
+      })
     }
 
     componentWillReceiveProps = (nextProps) => {
