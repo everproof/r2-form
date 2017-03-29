@@ -1,7 +1,7 @@
 {
   "name": "blueq-redux-form",
   "version": "0.0.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack",
     "lint": "eslint src/. --ext=js --ext=jsx; exit 0",

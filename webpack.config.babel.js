@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+const resolve = require('path').resolve
 
 const PATHS = {
   build: resolve(__dirname, 'dist'),
@@ -6,7 +6,28 @@ const PATHS = {
   src: resolve(__dirname, 'src'),
 }
 
-export default {
+const reactExternal = {
+  root: 'React',
+  commonjs2: 'react',
+  commonjs: 'react',
+  amd: 'react',
+}
+
+const reduxExternal = {
+  root: 'Redux',
+  commonjs2: 'redux',
+  commonjs: 'redux',
+  amd: 'redux',
+}
+
+const reactReduxExternal = {
+  root: 'ReactRedux',
+  commonjs2: 'react-redux',
+  commonjs: 'react-redux',
+  amd: 'react-redux',
+}
+
+module.exports = {
   entry: './index.js',
   output: {
     path: PATHS.build,
@@ -44,12 +65,9 @@ export default {
   },
   devtool: 'source-map',
   context: PATHS.src,
-  externals: [
-    'immutable',
-    'lodash',
-    'react',
-    'react-redux',
-    'redux',
-    'redux-actions',
-  ],
+  externals: {
+    react: reactExternal,
+    redux: reduxExternal,
+    'react-redux': reactReduxExternal,
+  },
 }
