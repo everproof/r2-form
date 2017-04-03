@@ -1,4 +1,4 @@
-import { get, omit, pick } from 'lodash'
+import { get, omit } from 'lodash'
 import { createAction } from 'redux-actions'
 
 import {
