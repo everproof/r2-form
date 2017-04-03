@@ -38,6 +38,7 @@
   "bugs": {
     "url": "https://github.com/blueqaus/r2-form/issues"
   },
+  "homepage": "https://github.com/blueqaus/r2-form#readme",
   "jest": {
     "moduleDirectories": [
       "node_modules",
