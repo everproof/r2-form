@@ -12,6 +12,6 @@ export default handleActions({
     meta.form,
     Map(),
     form => form.setIn(meta.name.split('.'), payload.value)),
-  [CLEAR]: (state, { meta }) => state.delete(meta),
-  [INITIALISE]: (state, { meta, payload }) => state.set(meta, fromJS(payload)),
+  [CLEAR]: (state, { meta }) => state.delete(meta.form),
+  [INITIALISE]: (state, { meta, payload }) => state.set(meta.form, fromJS(payload)),
 }, Map())

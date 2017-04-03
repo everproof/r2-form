@@ -32,7 +32,9 @@ describe('testing reducer', () => {
   test('should update value of field', () => {
     const target = {
       checked: false,
-      form: 'form',
+      form: {
+        name: 'form',
+      },
       name: 'name',
       value: 'value',
     }

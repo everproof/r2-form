@@ -13,7 +13,9 @@ describe('testing action creators', () => {
   test('should create an action to change a form field value', () => {
     const target = {
       checked: false,
-      form: 'form',
+      form: {
+        name: 'form',
+      },
       name: 'name',
       value: 'value',
     }
@@ -25,7 +27,7 @@ describe('testing action creators', () => {
         value: target.value,
       },
       meta: {
-        form: target.form,
+        form: target.form.name,
         name: target.name,
       },
     })
@@ -36,7 +38,9 @@ describe('testing action creators', () => {
 
     expect(clear(form)).toEqual({
       type: CLEAR,
-      meta: form,
+      meta: {
+        form,
+      },
     })
   })
 
@@ -52,7 +56,9 @@ describe('testing action creators', () => {
     })).toEqual({
       type: INITIALISE,
       payload,
-      meta: form,
+      meta: {
+        form,
+      },
     })
   })
 })

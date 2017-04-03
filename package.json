@@ -1,5 +1,5 @@
 {
-  "name": "blueq-redux-form",
+  "name": "r2-form",
   "version": "0.0.0",
   "main": "dist/index.js",
   "scripts": {
@@ -13,8 +13,31 @@
     "test:watchall": "jest --watchAll",
     "test:cov": "jest --coverage; exit 0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blueqaus/r2-form.git"
+  },
+  "keywords": [
+    "babel",
+    "blueq",
+    "form",
+    "immutablejs",
+    "javascript",
+    "react",
+    "react-redux",
+    "redux"
+  ],
   "author": "Rhys Gevaux <rhys.gevaux@blueq.com.au>",
+  "contributors": [
+    {
+      "name": "Rhys Gevaux",
+      "url": "https://twitter.com/vorksau"
+    }
+  ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blueqaus/r2-form/issues"
+  },
   "jest": {
     "moduleDirectories": [
       "node_modules",

@@ -13,17 +13,21 @@ export const change = createAction(
     checked,
     value,
   }),
-  ({ form: { name: formName }, name }) => ({
-    form: formName,
+  ({ form: { name: form }, name }) => ({
+    form,
     name,
   }))
 
 export const clear = createAction(
   CLEAR,
   () => {},
-  form => form)
+  form => ({
+    form,
+  }))
 
 export const initialise = createAction(
   INITIALISE,
   payload => omit(payload, ['form']),
-  payload => get(payload, ['form']))
+  payload => ({
+    form: get(payload, ['form']),
+  }))
