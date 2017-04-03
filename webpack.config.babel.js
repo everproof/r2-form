@@ -6,6 +6,13 @@ const PATHS = {
   src: resolve(__dirname, 'src'),
 }
 
+const immutableExternal = {
+  root: 'Immutable',
+  commonjs2: 'immutable',
+  commonjs: 'immutable',
+  amd: 'immutable',
+}
+
 const reactExternal = {
   root: 'React',
   commonjs2: 'react',
@@ -66,6 +73,7 @@ module.exports = {
   devtool: 'source-map',
   context: PATHS.src,
   externals: {
+    immutable: immutableExternal,
     react: reactExternal,
     redux: reduxExternal,
     'react-redux': reactReduxExternal,
