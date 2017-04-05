@@ -10,13 +10,17 @@ class Form extends Component {
     form: PropTypes.string.isRequired,
   }
 
+  static defaultProps = {
+    initialValues: {},
+  }
+
   static displayName = 'Form'
 
   static propTypes = {
     children: PropTypes.node.isRequired,
     clear: PropTypes.func.isRequired,
     initialise: PropTypes.func.isRequired,
-    initialValues: PropTypes.shape().isRequired,
+    initialValues: PropTypes.shape(),
     name: PropTypes.string.isRequired,
   }
 

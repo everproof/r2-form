@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actionCreators from 'form/actionCreators'
+import { getNameAndIndexFromInputName, withFormContext } from 'helpers'
 
 class Field extends Component {
   static defaultProps = {
@@ -17,7 +18,10 @@ class Field extends Component {
     change: PropTypes.func.isRequired,
     checked: PropTypes.bool,
     children: PropTypes.node,
-    component: PropTypes.element.isRequired,
+    component: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]).isRequired,
     form: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
@@ -54,58 +58,24 @@ class Field extends Component {
   }
 }
 
-const mapStateToProps = ({ form: formState }, { form, name, value }) => ({
-  value: value
-    ? value
-    : formState.getIn([form, ...name.split('.')]),
+const getInputValueFromList = (values, index) => values && values.get(index)
+
+const getInputValueFromState = (formState, form, inputName) => {
+  const { index, name } = getNameAndIndexFromInputName(inputName)
+  const values = formState.getIn([form, ...name.split('.')])
+
+  return index
+    ? getInputValueFromList(values, index)
+    : values
+}
+
+const getInputValue = (formState, { form, name, value }) =>
+  value ? value : getInputValueFromState(formState, form, name)
+
+const mapStateToProps = ({ form: formState }, props) => ({
+  value: getInputValue(formState, props),
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch)
 
-const ConnectedField = connect(mapStateToProps, mapDispatchToProps)(Field)
-
-function FieldWrapper (props, { form }) {
-  return <ConnectedField {...props} form={form} />
-}
-
-FieldWrapper.contextTypes = {
-  form: PropTypes.string.isRequired,
-}
-
-FieldWrapper.displayName = 'FieldWrapper'
-
-export default FieldWrapper
-
-// export default (WrappedComponent) => {
-//   class Field extends Component {
-//     static propTypes = {
-//       change: PropTypes.func.isRequired,
-//     }
-
-//     handleChange = ({ target }) => {
-//       this.props.change(target)
-//     }
-
-//     render = () => <WrappedComponent onChange={this.handleChange} {...this.props} />
-//   }
-
-//   const mapStateToProps = ({ form: formState }, { form, name, value }) => ({
-//     value: value
-//       ? value
-//       : formState.getIn([form, ...name.split('.')]),
-//   })
-
-//   const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch)
-
-//   const ConnectedField = connect(mapStateToProps, mapDispatchToProps)(Field)
-
-//   function FieldWrapper (props, { form }) {
-//     return <ConnectedField {...props} form={form} />
-//   }
-
-//   FieldWrapper.contextTypes = {
-//     form: PropTypes.string.isRequired,
-//   }
-
-//   return FieldWrapper
-// }
+export default withFormContext(connect(mapStateToProps, mapDispatchToProps)(Field))

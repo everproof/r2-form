@@ -2,7 +2,7 @@ import { fromJS, Map } from 'immutable'
 import * as immutableMatchers from 'jest-immutable-matchers'
 
 import form from 'form'
-import { change, clear, initialise } from 'form/actionCreators'
+import { change, clear, initialise, listAdd } from 'form/actionCreators'
 
 import {
   initialState,
@@ -21,10 +21,12 @@ describe('testing reducer', () => {
       form: 'form',
       name: 'name',
       age: 15,
+      items: ['one'],
     }))).toEqualImmutable(fromJS({
       form: {
         name: 'name',
         age: 15,
+        items: ['one'],
       },
     }))
   })
@@ -42,6 +44,36 @@ describe('testing reducer', () => {
     expect(form(initialState, change(target))).toEqualImmutable(fromJS({
       form: {
         [target.name]: target.value,
+      },
+    }))
+  })
+
+  test('should update the value of a list field', () => {
+    const target = {
+      checked: false,
+      form: {
+        name: 'form',
+      },
+      name: 'items[0]',
+      value: 'new',
+    }
+
+    expect(form(initialState, change(target))).toEqualImmutable(fromJS({
+      form: {
+        items: [target.value],
+      },
+    }))
+  })
+
+  test('should add an empty value to a list field', () => {
+    const meta = {
+      form: 'form',
+      name: 'name',
+    }
+
+    expect(form(initialState, listAdd(meta))).toEqualImmutable(fromJS({
+      form: {
+        name: [''],
       },
     }))
   })

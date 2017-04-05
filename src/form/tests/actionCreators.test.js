@@ -2,11 +2,13 @@ import {
   change,
   clear,
   initialise,
+  listAdd,
 } from 'form/actionCreators'
 import {
   CHANGE,
   CLEAR,
   INITIALISE,
+  LIST_ADD,
 } from 'form/actionTypes'
 
 describe('testing action creators', () => {
@@ -28,6 +30,7 @@ describe('testing action creators', () => {
       },
       meta: {
         form: target.form.name,
+        index: null,
         name: target.name,
       },
     })
@@ -59,6 +62,20 @@ describe('testing action creators', () => {
       meta: {
         form,
       },
+    })
+  })
+
+  test('should create an action to add to a value list', () => {
+    const meta = {
+      form: 'form',
+      name: 'name',
+    }
+
+    expect(listAdd({
+      ...meta,
+    })).toEqual({
+      type: LIST_ADD,
+      meta,
     })
   })
 })
