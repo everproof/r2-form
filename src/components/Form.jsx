@@ -19,6 +19,7 @@ class Form extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     clear: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     initialise: PropTypes.func.isRequired,
     initialValues: PropTypes.shape(),
     name: PropTypes.string.isRequired,
@@ -45,6 +46,11 @@ class Form extends Component {
     this.props.clear(this.props.name)
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    this.props.handleSubmit()
+  }
+
   initialise = (values) => {
     this.props.initialise({
       form: this.props.name,
@@ -53,7 +59,7 @@ class Form extends Component {
   }
 
   render = () => (
-    <form name={this.props.name}>
+    <form name={this.props.name} onSubmit={this.handleSubmit}>
       {this.props.children}
     </form>
   )
