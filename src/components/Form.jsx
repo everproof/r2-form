@@ -19,10 +19,10 @@ class Form extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     clear: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
     initialise: PropTypes.func.isRequired,
     initialValues: PropTypes.shape(),
     name: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   }
 
   getChildContext = () => ({
@@ -48,7 +48,7 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.handleSubmit()
+    this.props.onSubmit()
   }
 
   initialise = (values) => {
