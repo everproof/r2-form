@@ -5,6 +5,7 @@ import form from 'form'
 import { change, clear, initialise, listAdd } from 'form/actionCreators'
 
 import {
+  checkboxUpdateState,
   initialState,
   undefinedState,
 } from './mock'
@@ -61,6 +62,38 @@ describe('testing reducer', () => {
     expect(form(initialState, change(target))).toEqualImmutable(fromJS({
       form: {
         items: [target.value],
+      },
+    }))
+  })
+
+  test('should update the value of a checkbox field', () => {
+    const target = {
+      checked: true,
+      form: {
+        name: 'form',
+      },
+      name: 'checkbox',
+      type: 'checkbox',
+      value: 'checked',
+    }
+
+    expect(form(initialState, change(target))).toEqualImmutable(checkboxUpdateState)
+  })
+
+  test('should update the value of a checkbox field', () => {
+    const target = {
+      checked: false,
+      form: {
+        name: 'form',
+      },
+      name: 'checkbox',
+      type: 'checkbox',
+      value: 'checked',
+    }
+
+    expect(form(checkboxUpdateState, change(target))).toEqualImmutable(fromJS({
+      form: {
+        [target.name]: [],
       },
     }))
   })

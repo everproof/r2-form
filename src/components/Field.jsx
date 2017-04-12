@@ -10,6 +10,7 @@ class Field extends Component {
     checked: false,
     children: null,
     placeholder: '',
+    type: null,
   }
 
   static displayName = 'Field'
@@ -21,10 +22,12 @@ class Field extends Component {
     component: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]).isRequired,
     form: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
+    type: PropTypes.string,
     value: PropTypes.string.isRequired,
   }
 
@@ -40,6 +43,7 @@ class Field extends Component {
       form,
       name,
       placeholder,
+      type,
       value,
     } = this.props
 
@@ -50,6 +54,7 @@ class Field extends Component {
         name={name}
         onChange={this.handleChange}
         placeholder={placeholder}
+        type={type}
         value={value}
       >
         {children}
@@ -69,12 +74,15 @@ const getInputValueFromState = (formState, form, inputName) => {
     : values
 }
 
-const getInputValue = (formState, { form, name, value }) =>
-  value ? value : getInputValueFromState(formState, form, name)
+const mapStateToProps = ({ form: formState }, { form, name, type, value }) => {
+  const NOT_FOUND = -1
+  const stateValue = getInputValueFromState(formState, form, name)
 
-const mapStateToProps = ({ form: formState }, props) => ({
-  value: getInputValue(formState, props),
-})
+  return {
+    checked: type === 'checkbox' && stateValue && stateValue.indexOf(value) !== NOT_FOUND,
+    value: value ? value : stateValue,
+  }
+}
 
 const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch)
 
