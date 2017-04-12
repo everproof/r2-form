@@ -14,7 +14,6 @@ import {
 describe('testing action creators', () => {
   test('should create an action to change a form field value', () => {
     const target = {
-      checked: false,
       form: {
         name: 'form',
       },
@@ -25,12 +24,12 @@ describe('testing action creators', () => {
     expect(change(target)).toEqual({
       type: CHANGE,
       payload: {
-        checked: target.checked,
         value: target.value,
       },
       meta: {
         form: target.form.name,
         index: null,
+        isCheckbox: false,
         name: target.name,
       },
     })

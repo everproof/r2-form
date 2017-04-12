@@ -16,8 +16,9 @@ export const change = createAction(
     checked,
     value,
   }),
-  ({ form: { name: form }, name }) => ({
+  ({ form: { name: form }, name, type }) => ({
     form,
+    isCheckbox: type === 'checkbox',
     ...getNameAndIndexFromInputName(name),
   }))
 
