@@ -93,7 +93,7 @@ describe('testing reducer', () => {
 
     expect(form(checkboxUpdateState, change(target))).toEqualImmutable(fromJS({
       form: {
-        [target.name]: [],
+        [target.name]: target.checked,
       },
     }))
   })
