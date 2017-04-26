@@ -1,2 +1,5 @@
 *
-!dist/
+!/.npmignore
+!/dist/
+!/package.json
+!/src/
