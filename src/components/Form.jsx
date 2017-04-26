@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash'
+import { fromJS, is } from 'immutable'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -33,12 +33,11 @@ class Form extends Component {
     this.initialise(this.props.initialValues)
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps
-      && this.props.initialValues
-      && nextProps.initialValues
-      && !isEqual(this.props.initialValues, nextProps.initialValues)) {
-      this.initialise(nextProps.initialValues)
+  componentWillReceiveProps = ({ initialValues: nextValues }) => {
+    if (!this.props.initialValues
+        && nextValues
+        && !is(fromJS(this.props.initialValues), fromJS(nextValues))) {
+      this.initialise(nextValues)
     }
   }
 

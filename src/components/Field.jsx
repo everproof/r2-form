@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { List } from 'immutable'
 
 import * as actionCreators from 'form/actionCreators'
 import { getNameAndIndexFromInputName, withFormContext } from 'helpers'
@@ -74,12 +75,21 @@ const getInputValueFromState = (formState, form, inputName) => {
     : values
 }
 
-const mapStateToProps = ({ form: formState }, { form, name, type, value }) => {
+const getValueFromArray = (stateValue, value) => {
   const NOT_FOUND = -1
+
+  if (stateValue && List.isList(stateValue)) {
+    return stateValue.indexOf(value) !== NOT_FOUND
+  }
+
+  return Boolean(stateValue)
+}
+
+const mapStateToProps = ({ form: formState }, { form, name, type, value }) => {
   const stateValue = getInputValueFromState(formState, form, name)
 
   return {
-    checked: type === 'checkbox' && stateValue && stateValue.indexOf(value) !== NOT_FOUND,
+    checked: type === 'checkbox' ? getValueFromArray(stateValue, value) : null,
     value: value ? value : stateValue,
   }
 }

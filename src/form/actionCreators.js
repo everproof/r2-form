@@ -1,4 +1,3 @@
-import { get, omit } from 'lodash'
 import { createAction } from 'redux-actions'
 
 import { getNameAndIndexFromInputName } from 'helpers'
@@ -31,9 +30,9 @@ export const clear = createAction(
 
 export const initialise = createAction(
   INITIALISE,
-  payload => omit(payload, ['form']),
+  ({ form, ...payload }) => payload,
   payload => ({
-    form: get(payload, ['form']),
+    form: payload.form,
   }))
 
 export const listAdd = createAction(
