@@ -31,8 +31,8 @@ export const clear = createAction(
 export const initialise = createAction(
   INITIALISE,
   ({ form, ...payload }) => payload,
-  payload => ({
-    form: payload.form,
+  ({ form }) => ({
+    form,
   }))
 
 export const listAdd = createAction(
