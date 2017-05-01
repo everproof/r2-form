@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blueqaus/r2-form.git"
+    "url": "blueqaus/r2-form"
   },
   "keywords": [
     "babel",
