@@ -1,9 +1,9 @@
-import { fromJS, is } from 'immutable'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actionCreators from 'form/actionCreators'
+import { isEqual } from 'helpers'
 
 class Form extends Component {
   static childContextTypes = {
@@ -36,7 +36,7 @@ class Form extends Component {
   componentWillReceiveProps = ({ initialValues: nextValues }) => {
     if (!this.props.initialValues
         && nextValues
-        && !is(fromJS(this.props.initialValues), fromJS(nextValues))) {
+        && !isEqual(this.props.initialValues, nextValues)) {
       this.initialise(nextValues)
     }
   }
