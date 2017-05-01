@@ -1,5 +1,3 @@
 *
-!/.npmignore
-!/dist/
-!/package.json
-!/src/
+!dist/
+!src
