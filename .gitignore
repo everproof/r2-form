@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io/api/emacs,git,linux,macos,node,sublimetext,vim,visualstudiocode,windows
 
+.idea/
+
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~

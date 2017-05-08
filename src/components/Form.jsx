@@ -1,9 +1,9 @@
-import { isEqual } from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actionCreators from 'form/actionCreators'
+import { isEqual } from 'helpers'
 
 class Form extends Component {
   static childContextTypes = {
@@ -33,12 +33,11 @@ class Form extends Component {
     this.initialise(this.props.initialValues)
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps
-      && this.props.initialValues
-      && nextProps.initialValues
-      && !isEqual(this.props.initialValues, nextProps.initialValues)) {
-      this.initialise(nextProps.initialValues)
+  componentWillReceiveProps = ({ initialValues: nextValues }) => {
+    if (!this.props.initialValues
+        && nextValues
+        && !isEqual(this.props.initialValues, nextValues)) {
+      this.initialise(nextValues)
     }
   }
 

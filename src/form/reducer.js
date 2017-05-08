@@ -10,15 +10,23 @@ import {
 
 function change (formState, { index, isCheckbox, name }, { checked, value }) {
   function updateInput () {
-    function updateCheckbox (values) {
+    function updateCheckboxList (values) {
       return checked
         ? values.push(value)
         : values.filterNot(val => val === value)
     }
 
-    return isCheckbox
-      ? formState.updateIn(name.split('.'), List(), updateCheckbox)
-      : formState.setIn(name.split('.'), value)
+    function updateSingleValue () {
+      return isCheckbox
+        ? formState.setIn(name.split('.'), checked)
+        : formState.setIn(name.split('.'), value)
+    }
+
+    const isCheckboxList = isCheckbox && List.isList(formState.getIn(name.split('.')))
+
+    return isCheckboxList
+      ? formState.updateIn(name.split('.'), List(), updateCheckboxList)
+      : updateSingleValue()
   }
 
   function updateInputList () {

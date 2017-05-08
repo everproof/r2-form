@@ -39,7 +39,7 @@ module.exports = {
   output: {
     path: PATHS.build,
     filename: 'index.js',
-    library: 'blueq-redux-form',
+    library: 'r2-form',
     libraryTarget: 'umd',
   },
   module: {
