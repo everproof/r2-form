@@ -4,11 +4,7 @@ import * as immutableMatchers from 'jest-immutable-matchers'
 import form from 'form'
 import { change, clear, initialise, listAdd } from 'form/actionCreators'
 
-import {
-  checkboxUpdateState,
-  initialState,
-  undefinedState,
-} from './mock'
+import { checkboxUpdateState, initialState, undefinedState } from './mock'
 
 describe('testing reducer', () => {
   beforeEach(() => jest.addMatchers(immutableMatchers))
@@ -18,18 +14,25 @@ describe('testing reducer', () => {
   })
 
   test('should load object into form', () => {
-    expect(form(initialState, initialise({
-      form: 'form',
-      name: 'name',
-      age: 15,
-      items: ['one'],
-    }))).toEqualImmutable(fromJS({
-      form: {
-        name: 'name',
-        age: 15,
-        items: ['one'],
-      },
-    }))
+    expect(
+      form(
+        initialState,
+        initialise({
+          form: 'form',
+          name: 'name',
+          age: 15,
+          items: ['one'],
+        }),
+      ),
+    ).toEqualImmutable(
+      fromJS({
+        form: {
+          name: 'name',
+          age: 15,
+          items: ['one'],
+        },
+      }),
+    )
   })
 
   test('should update value of field', () => {
@@ -42,11 +45,13 @@ describe('testing reducer', () => {
       value: 'value',
     }
 
-    expect(form(initialState, change(target))).toEqualImmutable(fromJS({
-      form: {
-        [target.name]: target.value,
-      },
-    }))
+    expect(form(initialState, change(target))).toEqualImmutable(
+      fromJS({
+        form: {
+          [target.name]: target.value,
+        },
+      }),
+    )
   })
 
   test('should update the value of a list field', () => {
@@ -59,11 +64,13 @@ describe('testing reducer', () => {
       value: 'new',
     }
 
-    expect(form(initialState, change(target))).toEqualImmutable(fromJS({
-      form: {
-        items: [target.value],
-      },
-    }))
+    expect(form(initialState, change(target))).toEqualImmutable(
+      fromJS({
+        form: {
+          items: [target.value],
+        },
+      }),
+    )
   })
 
   test('should update the value of a checkbox field', () => {
@@ -77,7 +84,9 @@ describe('testing reducer', () => {
       value: 'checked',
     }
 
-    expect(form(initialState, change(target))).toEqualImmutable(checkboxUpdateState)
+    expect(form(initialState, change(target))).toEqualImmutable(
+      checkboxUpdateState,
+    )
   })
 
   test('should update the value of a checkbox field', () => {
@@ -91,11 +100,13 @@ describe('testing reducer', () => {
       value: 'checked',
     }
 
-    expect(form(checkboxUpdateState, change(target))).toEqualImmutable(fromJS({
-      form: {
-        [target.name]: target.checked,
-      },
-    }))
+    expect(form(checkboxUpdateState, change(target))).toEqualImmutable(
+      fromJS({
+        form: {
+          [target.name]: target.checked,
+        },
+      }),
+    )
   })
 
   test('should add an empty value to a list field', () => {
@@ -104,17 +115,20 @@ describe('testing reducer', () => {
       name: 'name',
     }
 
-    expect(form(initialState, listAdd(meta))).toEqualImmutable(fromJS({
-      form: {
-        name: [''],
-      },
-    }))
+    expect(form(initialState, listAdd(meta))).toEqualImmutable(
+      fromJS({
+        form: {
+          name: [''],
+        },
+      }),
+    )
   })
 
   test('should clear an existing form', () => {
     const formName = 'form'
 
-    expect(form(initialState.set(formName, Map()), clear(formName)))
-      .toEqualImmutable(initialState)
+    expect(
+      form(initialState.set(formName, Map()), clear(formName)),
+    ).toEqualImmutable(initialState)
   })
 })

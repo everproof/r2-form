@@ -1,13 +1,9 @@
 // Need to be able to add and remove from arrays (i.e. checkboxes)
 // Also enable multiple inputs controlling one value array
 
-import {
-  CHANGE,
-  CLEAR,
-  INITIALISE,
-} from 'form/actionTypes'
+import { CHANGE, CLEAR, INITIALISE } from 'form/actionTypes'
 
-function testActionTypeIsDefined (actionType, actionValue) {
+function testActionTypeIsDefined(actionType, actionValue) {
   test(`${actionValue} should be defined`, () => {
     expect(actionType).toBe(actionValue)
   })

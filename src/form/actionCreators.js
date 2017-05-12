@@ -1,13 +1,9 @@
+import { omit } from 'lodash-es'
 import { createAction } from 'redux-actions'
 
 import { getNameAndIndexFromInputName } from 'helpers'
 
-import {
-  CHANGE,
-  CLEAR,
-  INITIALISE,
-  LIST_ADD,
-} from './actionTypes'
+import { CHANGE, CLEAR, INITIALISE, LIST_ADD } from './actionTypes'
 
 export const change = createAction(
   CHANGE,
@@ -19,21 +15,24 @@ export const change = createAction(
     form,
     isCheckbox: type === 'checkbox',
     ...getNameAndIndexFromInputName(name),
-  }))
+  }),
+)
 
 export const clear = createAction(
   CLEAR,
   () => {},
   form => ({
     form,
-  }))
+  }),
+)
 
 export const initialise = createAction(
   INITIALISE,
-  ({ form, ...payload }) => payload,
+  payload => omit(payload, 'form'),
   ({ form }) => ({
     form,
-  }))
+  }),
+)
 
 export const listAdd = createAction(
   LIST_ADD,
@@ -41,4 +40,5 @@ export const listAdd = createAction(
   ({ form, name }) => ({
     form,
     name,
-  }))
+  }),
+)

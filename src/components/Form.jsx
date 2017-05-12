@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import { func, node, shape, string } from 'prop-types'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -7,7 +8,7 @@ import { isEqual } from 'helpers'
 
 class Form extends Component {
   static childContextTypes = {
-    form: PropTypes.string.isRequired,
+    form: string.isRequired,
   }
 
   static defaultProps = {
@@ -17,12 +18,12 @@ class Form extends Component {
   static displayName = 'Form'
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
-    clear: PropTypes.func.isRequired,
-    initialise: PropTypes.func.isRequired,
-    initialValues: PropTypes.shape(),
-    name: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func.isRequired,
+    children: node.isRequired,
+    clear: func.isRequired,
+    initialise: func.isRequired,
+    initialValues: shape(),
+    name: string.isRequired,
+    onSubmit: func.isRequired,
   }
 
   getChildContext = () => ({
@@ -43,12 +44,12 @@ class Form extends Component {
     this.props.clear(this.props.name)
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault()
     this.props.onSubmit()
   }
 
-  initialise = (values) => {
+  initialise = values => {
     this.props.initialise({
       form: this.props.name,
       ...values,
@@ -62,6 +63,7 @@ class Form extends Component {
   )
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(actionCreators, dispatch)
 
 export default connect(null, mapDispatchToProps)(Form)

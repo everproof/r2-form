@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import { bool, element, func, node, oneOfType, string } from 'prop-types'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { List } from 'immutable'
@@ -17,19 +18,15 @@ class Field extends Component {
   static displayName = 'Field'
 
   static propTypes = {
-    change: PropTypes.func.isRequired,
-    checked: PropTypes.bool,
-    children: PropTypes.node,
-    component: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]).isRequired,
-    form: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    type: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    change: func.isRequired,
+    checked: bool,
+    children: node,
+    component: oneOfType([element, func, string]).isRequired,
+    form: string.isRequired,
+    name: string.isRequired,
+    placeholder: string,
+    type: string,
+    value: string.isRequired,
   }
 
   handleChange = ({ target }) => {
@@ -70,9 +67,7 @@ const getInputValueFromState = (formState, form, inputName) => {
   const { index, name } = getNameAndIndexFromInputName(inputName)
   const values = formState.getIn([form, ...name.split('.')])
 
-  return index
-    ? getInputValueFromList(values, index)
-    : values
+  return index ? getInputValueFromList(values, index) : values
 }
 
 const getValueFromArray = (stateValue, value) => {
@@ -94,6 +89,9 @@ const mapStateToProps = ({ form: formState }, { form, name, type, value }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(actionCreators, dispatch)
 
-export default withFormContext(connect(mapStateToProps, mapDispatchToProps)(Field))
+export default withFormContext(
+  connect(mapStateToProps, mapDispatchToProps)(Field),
+)
