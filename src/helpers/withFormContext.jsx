@@ -1,11 +1,13 @@
-import React, { PropTypes } from 'react'
+import { string } from 'prop-types'
+import React from 'react'
 
-export default function withFormContext (WrappedComponent) {
-  const ComponentWrapper = (props, { form }) =>
+export default function withFormContext(WrappedComponent) {
+  const ComponentWrapper = (props, { form }) => (
     <WrappedComponent {...props} form={props.form || form} />
+  )
 
   ComponentWrapper.contextTypes = {
-    form: PropTypes.string.isRequired,
+    form: string.isRequired,
   }
 
   ComponentWrapper.defaultProps = {
@@ -15,7 +17,7 @@ export default function withFormContext (WrappedComponent) {
   ComponentWrapper.displayName = `${WrappedComponent.displayName}WithFormContext`
 
   ComponentWrapper.propTypes = {
-    form: PropTypes.string,
+    form: string,
   }
 
   return ComponentWrapper

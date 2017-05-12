@@ -1,15 +1,5 @@
-import {
-  change,
-  clear,
-  initialise,
-  listAdd,
-} from 'form/actionCreators'
-import {
-  CHANGE,
-  CLEAR,
-  INITIALISE,
-  LIST_ADD,
-} from 'form/actionTypes'
+import { change, clear, initialise, listAdd } from 'form/actionCreators'
+import { CHANGE, CLEAR, INITIALISE, LIST_ADD } from 'form/actionTypes'
 
 describe('testing action creators', () => {
   test('should create an action to change a form field value', () => {
@@ -52,10 +42,12 @@ describe('testing action creators', () => {
       name: 'name',
     }
 
-    expect(initialise({
-      ...payload,
-      form,
-    })).toEqual({
+    expect(
+      initialise({
+        ...payload,
+        form,
+      }),
+    ).toEqual({
       type: INITIALISE,
       payload,
       meta: {
@@ -70,9 +62,11 @@ describe('testing action creators', () => {
       name: 'name',
     }
 
-    expect(listAdd({
-      ...meta,
-    })).toEqual({
+    expect(
+      listAdd({
+        ...meta,
+      }),
+    ).toEqual({
       type: LIST_ADD,
       meta,
     })
