@@ -1,3 +1,5 @@
-import { fromJS, is } from 'immutable'
+import { is } from 'immutable'
 
-export default (first, second) => is(fromJS(first), fromJS(second))
+import fromJSGreedy from 'immutable/utils/fromJSGreedy'
+
+export default (first, second) => is(fromJSGreedy(first), fromJSGreedy(second))

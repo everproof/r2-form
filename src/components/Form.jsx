@@ -34,9 +34,7 @@ class Form extends Component {
   }
 
   componentWillReceiveProps = ({ initialValues: nextValues }) => {
-    if (!this.props.initialValues
-        && nextValues
-        && !isEqual(this.props.initialValues, nextValues)) {
+    if (!isEqual(this.props.initialValues, nextValues)) {
       this.initialise(nextValues)
     }
   }
