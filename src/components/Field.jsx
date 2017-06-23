@@ -32,11 +32,13 @@ class Field extends Component {
     this.props.change(target)
   }
 
-  render = () => {
+  render() {
     const {
+      change, // eslint-disable-line no-unused-vars
       checked,
       children,
       component: FieldComponent,
+      form, // eslint-disable-line no-unused-vars
       name,
       type,
       value,
@@ -87,7 +89,7 @@ const mapStateToProps = ({ form: formState }, { form, name, type, value }) => {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(actionCreators, dispatch)
+  bindActionCreators({ change: actionCreators.change }, dispatch)
 
 export default withFormContext(
   connect(mapStateToProps, mapDispatchToProps)(Field),
