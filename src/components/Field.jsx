@@ -24,7 +24,6 @@ class Field extends Component {
     component: oneOfType([element, func, string]).isRequired,
     form: string.isRequired,
     name: string.isRequired,
-    placeholder: string,
     type: string,
     value: string.isRequired,
   }
@@ -38,22 +37,20 @@ class Field extends Component {
       checked,
       children,
       component: FieldComponent,
-      form,
       name,
-      placeholder,
       type,
       value,
+      ...rest
     } = this.props
 
     return (
       <FieldComponent
         checked={checked}
-        id={`${form}-${name}`}
         name={name}
         onChange={this.handleChange}
-        placeholder={placeholder}
         type={type}
         value={value}
+        {...rest}
       >
         {children}
       </FieldComponent>

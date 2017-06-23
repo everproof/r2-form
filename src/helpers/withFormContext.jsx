@@ -2,9 +2,8 @@ import { string } from 'prop-types'
 import React from 'react'
 
 export default function withFormContext(WrappedComponent) {
-  const ComponentWrapper = (props, { form }) => (
+  const ComponentWrapper = (props, { form }) =>
     <WrappedComponent {...props} form={props.form || form} />
-  )
 
   ComponentWrapper.contextTypes = {
     form: string.isRequired,

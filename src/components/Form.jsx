@@ -56,11 +56,10 @@ class Form extends Component {
     })
   }
 
-  render = () => (
+  render = () =>
     <form name={this.props.name} onSubmit={this.handleSubmit}>
       {this.props.children}
     </form>
-  )
 }
 
 const mapDispatchToProps = dispatch =>
