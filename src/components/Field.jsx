@@ -24,7 +24,6 @@ class Field extends Component {
     component: oneOfType([element, func, string]).isRequired,
     form: string.isRequired,
     name: string.isRequired,
-    placeholder: string,
     type: string,
     value: string.isRequired,
   }
@@ -33,27 +32,27 @@ class Field extends Component {
     this.props.change(target)
   }
 
-  render = () => {
+  render() {
     const {
+      change, // eslint-disable-line no-unused-vars
       checked,
       children,
       component: FieldComponent,
-      form,
+      form, // eslint-disable-line no-unused-vars
       name,
-      placeholder,
       type,
       value,
+      ...rest
     } = this.props
 
     return (
       <FieldComponent
         checked={checked}
-        id={`${form}-${name}`}
         name={name}
         onChange={this.handleChange}
-        placeholder={placeholder}
         type={type}
         value={value}
+        {...rest}
       >
         {children}
       </FieldComponent>
@@ -90,7 +89,7 @@ const mapStateToProps = ({ form: formState }, { form, name, type, value }) => {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(actionCreators, dispatch)
+  bindActionCreators({ change: actionCreators.change }, dispatch)
 
 export default withFormContext(
   connect(mapStateToProps, mapDispatchToProps)(Field),
